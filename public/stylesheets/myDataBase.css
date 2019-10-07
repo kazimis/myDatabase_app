@@ -1,0 +1,77 @@
+body{
+  background-color: blue;
+  padding: 10px 50px 10px 50px;
+}
+.box{
+  height: auto;
+  background-color: green;
+  padding: 10px;
+  overflow: auto;
+}
+.info_box {
+  display: none;
+  position:fixed;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  padding-top: 150px;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.info_box_content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 600px;
+  height: 400px;
+}
+.exitSign {
+  background: red;
+  color: black;
+  border: solid black;
+  padding-left: 10px;
+  padding-right: 10px;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.exitSign:hover{
+  background: #F44B18;
+  cursor: pointer;
+}
+
+.iconBar{
+  background: black;
+  transition: all 0.6s;
+
+}
+
+.iconBar:hover{
+  background-color: #1cdf;
+}
+#homeIcon,#searchIcon{
+  color: white;
+
+}
+.active{
+  background-color: gray;
+}
+#button1{
+-webkit-transition-duration: 0.4s;
+ transition-duration: 0.4s;
+ border-radius: 5px;
+ border-collapse: collapse;
+}
+
+.button:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#dataList{
+  color: black;
+}
