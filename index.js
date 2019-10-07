@@ -16,6 +16,9 @@ express()
   .get('/db', async (req, res) => {
     try {
       const client = await pool.connect()
+      const query = client.query(
+        'CREATE TABLE Tokimon(id SERIAL PRIMARY KEY, text VARCHAR(40) not null, complete BOOLEAN)');
+      );
       const result = await client.query('SELECT * FROM Tokimon');
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
