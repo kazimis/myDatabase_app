@@ -4,17 +4,21 @@
   <link rel="stylesheet" href="stylesheets/myDataBase.css">
 </head>
 <body>
-    <h1>Torkimon Data</h1>
+    <h1>Tokimon Name List</h1>
 
     <div class="page_nav">
       <a href="/addData">Add Data</a>
       <a href="/readAll">All Data</a>
+      <a id = "display_link" href="stats">Display</a>
     </div>
     <div class="box">
-      <p>Click on each Tokimon for additional information about each Tokimon</p>
+      <p>Welcome to Tokimon page. Click on each Tokimon for additional information about each Tokimon.
+        You can also click on tokimon nameto direct you to delete/update page!</p>
       <div class="boxMydatabase">
         <% r.forEach(function(pi) {%>
-            <div class = "data_list" ><a onclick="gett(this.id)"id = "<%=pi.uid;%>"> <%=pi.name;%></a></div>
+            <div class = "data_list" >
+              <a onclick="gett(this.id)"id = "<%=pi.uid;%>"> <%=pi.name;%></a>
+            </div>
         <%})%>
       </div>
     </div>

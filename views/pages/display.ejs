@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<link rel="stylesheet" href="stylesheets/myDataBase.css">
+<script type="text/javascript">
+
+window.onload = function () {
+	var data =[];
+  <% height.forEach(function(r) { %>
+  data.push({ label: "<%= r.name %>",  y: <%= r.height %> });
+  <% }); %>
+  var chart = new CanvasJS.Chart("myChart", {
+	theme: "light1",
+	title:{
+		text: "Tokimon based on height"
+	},
+  axisY:{
+    title:"Height"
+  },
+	data: [
+	  {
+		type: "column",
+		dataPoints: data
+	  }
+  ]
+});
+chart.render();
+
+ }
+</script>
+</head>
+<body>
+  <div class="page_nav">
+    <a href="/myDataBase">Home</a>
+  </div>
+  <div class="box">
+    <div id="myChart" style="height: 400px; width: 100%;"></div>
+  </div>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script src="myDataBase.js"></script>
+  </body>
+  </html>

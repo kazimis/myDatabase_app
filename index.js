@@ -33,10 +33,6 @@ var app = express();
   //get addData page
   app.get('/addData',(req,res)=>{res.render('pages/addData');
   });
-
-  app.get('/update',(req,res)=>{res.render('pages/update');
-  });
-
   app.get('/readAll',(req,res)=> {
 
     var get_all_data = `SELECT * from tokimon`;
@@ -61,24 +57,34 @@ var app = express();
           res.send(err);
 
         });
-        var msg = "This data is deleted!";
+        var msg = "This data is deleted! No Data is here. Click home button toto Home page";
         res.render("pages/dataInfo", {'message':msg});
 
     }else if(id.includes("update")){
       var tmp = id.substr(6,id.length-1);
-      console.log(tmp);
       var update_byID = `SELECT * FROM tokimon where uid = ${tmp}`;
       pool.query(update_byID, (err,result)=>{
 
         if (err)
           res.send(err)
         var results = { 'results': (result) ? result.rows : null};
-        console.log(results);
+
         res.render('pages/update', results );
       });
+    }else if(id == "stats"){
+      var getHeight_sorted = `SELECT name, height, weight FROM tokimon order by height`;
+      pool.query(getHeight_sorted, (err,result)=>{
 
-    }else{
-      var getDataById = `SELECT * FROM tokimon where uid = ${id}`;
+        if (err)
+          res.send(err)
+        var height = { 'height': (result) ? result.rows : null};
+        
+        res.render('pages/display', height);
+      });
+
+    }else if(id.includes("info")){
+      var tmp = id.substr(3,id.length-1);
+      var getDataById = `SELECT * FROM tokimon where uid = ${tmp}`;
 
         pool.query(getDataById, (err,result)=>{
 
@@ -89,7 +95,11 @@ var app = express();
 
         })
     }
+    else{
+      res.send("Sorry Invalid link");
+    }
     });
+
   //after post HTML form
   app.post("/:id",(req, res) => {
     var myTotal = 0;
@@ -131,7 +141,6 @@ var app = express();
     }
 
     });
-
 
   app.get('/times', (req, res) => res.send(showTimes()));
 
