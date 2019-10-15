@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="stylesheets/myDataBase.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <h1>Update Data</h1>
+    <% results.forEach(function(r) { %>
+    <div class="box_addData">
+      <form id = "updateForm" action="" method="POST">
+        <div class="label_input">
+          <label for="name">Tokimon Name</label>
+  				<input value = "<%= r.name %>" type="text" name="1" placeholder="Name">
+        </div>
+        <div class="label_input">
+          <label for="weight">Weight</label>
+          <input value = "<%= r.weight %>" type="text" name="2" placeholder="weight">
+        </div>
+        <div class="label_input">
+          <label for="height">Height</label>
+          <input value = "<%= r.height %>" type="text" name="3" placeholder="height">
+        </div>
+        <div class="label_input">
+          <label for="fly">Fly</label>
+          <input value = "<%= r.fly %>" type="text" name="4" placeholder="fly">
+        </div>
+        <div class="label_input">
+          <label for="fight">Fight</label>
+          <input value = "<%= r.fight %>" type="text" name="5" placeholder="fight">
+        </div>
+        <div class="label_input">
+          <label for="fire">Fire</label>
+          <input value = "<%= r.fire %>" type="text" name="6" placeholder="fire">
+        </div>
+        <div class="label_input">
+          <label for="water">Water</label>
+          <input value = "<%= r.water %>" type="text" name="7" placeholder="water">
+        </div>
+        <div class="label_input">
+          <label for="electric">Electric</label>
+          <input value = "<%= r.electric %>" type="text" name="8" placeholder="electric">
+        </div>
+        <div class="label_input">
+          <label for="frozen">Frozen</label>
+          <input value = "<%= r.frozen %>" type="text" name="9" placeholder="frozen">
+        </div>
+        <div class="label_input">
+          <label for="Trainer_Name">Trainer Name</label>
+          <input value = "<%= r.trainer_name %>" type="text" name="10" placeholder="Trainer_Name">
+        </div>
+        <div class="label_input">
+          <input class = "submit_button" name = "submit" type="submit" onclick="return ifEmpty_update()">
+        </div>
+        <% }); %>
+			</form>
+    </div>
+</body>
+<script src="myDataBase.js"></script>
+</html>

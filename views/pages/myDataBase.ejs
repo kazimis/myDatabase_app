@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="stylesheets/myDataBase.css">
+</head>
+<body>
+    <h1>Torkimon Data</h1>
+
+    <div class="page_nav">
+      <a href="/addData">Add Data</a>
+      <a href="/readAll">All Data</a>
+    </div>
+    <div class="box">
+      <p>Click on each Tokimon for additional information about each Tokimon</p>
+      <div class="boxMydatabase">
+        <% r.forEach(function(pi) {%>
+            <div class = "data_list" ><a onclick="gett(this.id)"id = "<%=pi.uid;%>"> <%=pi.name;%></a></div>
+        <%})%>
+      </div>
+    </div>
+</body>
+<script src="myDataBase.js"></script>
+</html>

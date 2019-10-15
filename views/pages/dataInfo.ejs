@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="stylesheets/myDataBase.css">
+</head>
+<body>
+
+    <div class="page_nav">
+      <a href="/myDataBase">Home</a>
+      <a id = deleteLink>Delete</a>
+      <a id = updateLink>Update</a>
+    </div>
+    <div class="box">
+      <p>This Tokimon is with the following attribute:</p>
+      <%if(locals.message){ %>
+      <p1> <%= message %> </p1>
+      <% } %>
+      <table id = "myTable">
+        <%if(locals.results){ %>
+          <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Weight</th>
+              <th>Height</th>
+              <th>Fly</th>
+              <th>Fight</th>
+              <th>Fire</th>
+              <th>Water</th>
+              <th>Electric</th>
+              <th>Frozen</th>
+              <th>Total</th>
+              <th>Trainer_Name</th>
+          </tr>
+
+          <% results.forEach(function(r) { %>
+          <tr>
+              <td><%= r.uid %></td>
+              <td><%= r.name %></td>
+              <td><%= r.weight %></td>
+              <td><%= r.height %></td>
+              <td><%= r.fly %></td>
+              <td><%= r.fight %></td>
+              <td><%= r.fire %></td>
+              <td><%= r.water %></td>
+              <td><%= r.electric %></td>
+              <td><%= r.frozen %></td>
+              <td><%= r.total %></td>
+              <td><%= r.trainer_name %></td>
+          </tr>
+
+          <% });} %>
+
+      </table>
+    </div>
+</body>
+<script src="myDataBase.js"></script>
+</html>
