@@ -9,10 +9,11 @@ const PORT = process.env.PORT || 5000
 var bodyParser = require('body-parser');
 var app = express();
 
-  app.use(express.static(path.join(__dirname, 'pages')));
+  app.use(express.static(path.join(__dirname, 'public')));
   app.use(express.json());
   app.use(express.urlencoded({extended : true}));
   app.set('views', path.join(__dirname, 'views'));
+  app.set('pages', path.join(__dirname, 'views/pages'));
   app.set('view engine', 'ejs');
   app.get('/', (req, res) => res.render('pages/index'));
 
