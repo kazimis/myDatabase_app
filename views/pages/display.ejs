@@ -35,7 +35,14 @@ chart.render();
     <a href="/myDataBase">Home</a>
   </div>
   <div class="box">
-    <div id="myChart" style="height: 400px; width: 100%;"></div>
+		<div id="myChart" style="height: 400px; width: 100%;"></div>
+
+		<div class="chart">
+			<h1>Tokimon based on height(vertical) and weight(horizontal)</h1>
+			<% height.forEach(function(r) { %>
+  		<div style="width: <%= r.weight%>px; height:<%= r.height%>px;"><%= r.name%></div>
+			<% }); %>
+		</div>
   </div>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <script src="myDataBase.js"></script>

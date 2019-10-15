@@ -8,7 +8,6 @@ const path = require('path')
 const PORT = process.env.PORT || 5000
 var bodyParser = require('body-parser');
 var app = express();
-
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(express.json());
   app.use(express.urlencoded({extended : true}));
@@ -19,14 +18,12 @@ var app = express();
 
   //get database home page
   app.get('/myDataBase',(req,res)=> {
-    console.log("no");
     var getUidNameQuerry = `select uid,name from tokimon`;
       pool.query(getUidNameQuerry,(err,result)=>{
         if(err)
           res.end(err)
         var r = { 'r': (result) ? result.rows : null};
         res.render('pages/myDataBase', r );
-      //client.release();
     })
     });
 
@@ -47,57 +44,58 @@ var app = express();
 
   app.get('/:id',(req,res) =>{
     var id = req.params.id;
-
-    if(id.includes("del")){
-      var tmp = id.substr(3,id.length-1);
-
-      var deleteData_byID = `Delete from tokimon where uid = ${tmp}`;
-      pool.query(deleteData_byID, (err)=>{
-        if (err)
-          res.send(err);
-
-        });
-        var msg = "This data is deleted! No Data is here. Click home button toto Home page";
-        res.render("pages/dataInfo", {'message':msg});
-
+    var linkError = "Sorry Invalid link";
+      if(id.includes("del")){
+        var tmp = id.substr(3,id.length-1);
+        if(!isNaN(tmp)){
+        var deleteData_byID = `Delete from tokimon where uid = ${tmp}`;
+        pool.query(deleteData_byID, (err)=>{
+          if (err)
+            res.end(err);
+          });
+          var msg = "This data is deleted! No Data is here. Click home button toto Home page";
+          res.render("pages/dataInfo", {'message':msg});
+        }else{
+        res.send(linkError);
+        }
     }else if(id.includes("update")){
       var tmp = id.substr(6,id.length-1);
       var update_byID = `SELECT * FROM tokimon where uid = ${tmp}`;
-      pool.query(update_byID, (err,result)=>{
+      if(!isNaN(tmp)){
+        pool.query(update_byID, (err,result)=>{
+          if (err)
+            res.end(err)
 
-        if (err)
-          res.send(err)
-        var results = { 'results': (result) ? result.rows : null};
-
-        res.render('pages/update', results );
+          var results = { 'results': (result) ? result.rows : null};
+          res.render('pages/update', results );
       });
+      }else{
+        res.send(linkError);
+      }
     }else if(id == "stats"){
       var getHeight_sorted = `SELECT name, height, weight FROM tokimon order by height`;
       pool.query(getHeight_sorted, (err,result)=>{
-
         if (err)
-          res.send(err)
+          res.end(err)
         var height = { 'height': (result) ? result.rows : null};
-        
         res.render('pages/display', height);
       });
 
     }else if(id.includes("info")){
-      var tmp = id.substr(3,id.length-1);
+      var tmp = id.substr(4,id.length-1);
       var getDataById = `SELECT * FROM tokimon where uid = ${tmp}`;
-
-        pool.query(getDataById, (err,result)=>{
-
-          if (err)
-            res.send(err)
-          var results = { 'results': (result) ? result.rows : null};
-          res.render('pages/dataInfo', results );
-
-        })
-    }
-    else{
-      res.send("Sorry Invalid link");
-    }
+        if(!isNaN(tmp)){
+            pool.query(getDataById, (err,result)=>{
+              if (err)
+                res.end(err)
+              var results = { 'results': (result) ? result.rows : null};
+              res.render('pages/dataInfo', results );
+            })
+        }
+        else{
+          res.send(linkError);
+        }
+    }else{res.send(linkError);}
     });
 
   //after post HTML form
@@ -118,9 +116,9 @@ var app = express();
       ,total =  ${myTotal} ,trainer_name = '${myForm[10]}' where uid = ${tmp}`;
       pool.query(updateQuerry,(error)=>{
         if (error){
-          res.send(error);
+          res.end(error);
         }
-        res.render('pages/dataInfo');
+        res.redirect('/info'+tmp);
       });
 
     }

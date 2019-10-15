@@ -11,7 +11,7 @@
     </div>
     <% results.forEach(function(r) { %>
     <div class="box_addData">
-      <form id = "updateForm" action="" method="POST">
+      <form id = "myForm" action="" method="POST">
         <div class="label_input">
           <label for="name">Tokimon Name</label>
   				<input value = "<%= r.name %>" type="text" name="1" placeholder="Name">
@@ -53,7 +53,7 @@
           <input value = "<%= r.trainer_name %>" type="text" name="10" placeholder="Trainer_Name">
         </div>
         <div class="label_input">
-          <input class = "submit_button" name = "submit" type="submit" onclick="return ifEmpty_update()">
+          <input class = "submit_button" name = "submit" type="submit" onclick="return ifEmpty()">
         </div>
         <% }); %>
 			</form>
